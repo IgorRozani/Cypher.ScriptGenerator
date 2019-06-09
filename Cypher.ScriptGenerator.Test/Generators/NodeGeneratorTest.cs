@@ -164,6 +164,21 @@ namespace Cypher.ScriptGenerator.Test.Generators
         }
 
         [Trait("NodeGenerator", "CreateNode")]
+        [Fact(DisplayName = "With bool property")]
+        public void WithBoolProperty()
+        {
+            var script = _nodeGenerator.CreateNode(new Node
+            {
+                Properties = new Dictionary<string, object>
+                {
+                    { "active",true}
+                }
+            });
+
+            Assert.Equal("CREATE ( {active:True})", script);
+        }
+
+        [Trait("NodeGenerator", "CreateNode")]
         [Fact(DisplayName = "With multiple properties")]
         public void WithMultipleProperties()
         {

@@ -1,8 +1,6 @@
 ﻿using Cypher.ScriptGenerator.Interfaces;
 using Cypher.ScriptGenerator.Models;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -32,40 +30,10 @@ namespace Cypher.ScriptGenerator.Generators
             var scriptBuilder = new StringBuilder();
             scriptBuilder.Append('(').Append(node.Id);
 
-            foreach (var label in node.Labels)
-                scriptBuilder.Append(':').Append(label);
+            scriptBuilder.Append(GetLabels(node.Labels));
 
             if (node.Properties.Any())
-            {
-                scriptBuilder.Append(" {");
-
-                foreach (var property in node.Properties)
-                {
-                    if (property.Value == null)
-                        continue;
-
-                    scriptBuilder.Append(property.Key).Append(":");
-
-                    switch (Type.GetTypeCode(property.Value.GetType()))
-                    {
-                        case TypeCode.String:
-                            scriptBuilder.Append("\"").Append(property.Value).Append("\"");
-                            break;
-                        case TypeCode.DateTime:
-                            var datetime = (DateTime)property.Value;
-                            scriptBuilder.Append("datetime({year:").Append(datetime.Year).Append(", month:").Append(datetime.Month).Append(", day:").Append(datetime.Day).Append(", hour:").Append(datetime.Hour).Append(", minute:").Append(datetime.Minute).Append(", second:").Append(datetime.Second).Append("})");
-                            break;
-                        default:
-                            scriptBuilder.Append(Convert.ToString(property.Value, CultureInfo.InvariantCulture));
-                            break;
-                    }
-
-                    if (property.Key != node.Properties.Keys.LastOrDefault())
-                        scriptBuilder.Append(", ");
-                }
-
-                scriptBuilder.Append("}");
-            }
+                scriptBuilder.Append(GetProperties(node.Properties));
 
             scriptBuilder.Append(")");
 
