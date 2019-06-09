@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace Cypher.ScriptGenerator.Test
+namespace Cypher.ScriptGenerator.Test.Generators
 {
     public class NodeGeneratorTest
     {
@@ -225,9 +225,7 @@ namespace Cypher.ScriptGenerator.Test
                             { "number", 133}
                         }
                     },
-                }
-
-                );
+                });
 
             Assert.Equal("CREATE \r\n(pikachu:Pokemon:Electric {name:\"Pikachu\", number:25}), \r\n(evee:Pokemon:Normal {name:\"Evee\", number:133})", script);
         }
