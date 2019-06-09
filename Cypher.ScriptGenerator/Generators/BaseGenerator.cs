@@ -1,4 +1,4 @@
-﻿namespace Cypher.ScriptGenerator
+﻿namespace Cypher.ScriptGenerator.Generators
 {
     public class BaseGenerator
     {
