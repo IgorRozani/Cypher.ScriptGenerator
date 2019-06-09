@@ -9,7 +9,7 @@ namespace Cypher.ScriptGenerator.Generators
 
     public class NodeGenerator : BaseGenerator, INodeGenerator
     {
-        public string CreateNodes(IList<Node> nodes)
+        public string Create(IList<Node> nodes)
         {
             var scriptStringBuilder = new StringBuilder();
             scriptStringBuilder.AppendLine(CREATE);
@@ -22,7 +22,7 @@ namespace Cypher.ScriptGenerator.Generators
             return scriptStringBuilder.ToString();
         }
 
-        public string CreateNode(Node node) =>
+        public string Create(Node node) =>
             CREATE + GenerateNode(node);
 
         private string GenerateNode(Node node)

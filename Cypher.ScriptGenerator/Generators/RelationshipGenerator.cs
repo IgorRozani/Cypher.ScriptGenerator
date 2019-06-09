@@ -9,7 +9,7 @@ namespace Cypher.ScriptGenerator.Generators
 
     public class RelationshipGenerator : BaseGenerator, IRelationshipGenerator
     {
-        public string CreateRelationships(IList<Relationship> relationships)
+        public string Create(IList<Relationship> relationships)
         {
             var scriptStringBuilder = new StringBuilder();
             scriptStringBuilder.AppendLine(CREATE);
@@ -22,7 +22,7 @@ namespace Cypher.ScriptGenerator.Generators
             return scriptStringBuilder.ToString();
         }
 
-        public string CreateRelationship(Relationship relationship) =>
+        public string Create(Relationship relationship) =>
             CREATE + GenerateRelationship(relationship);
 
         private string GenerateRelationship(Relationship relationship)

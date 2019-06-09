@@ -15,29 +15,29 @@ namespace Cypher.ScriptGenerator.Test.Generators
             _nodeGenerator = new NodeGenerator();
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "Empty node")]
         public void EmptyNode()
         {
-            var script = _nodeGenerator.CreateNode(new Node());
+            var script = _nodeGenerator.Create(new Node());
 
             Assert.Equal("CREATE ()", script);
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "With id")]
         public void WithId()
         {
-            var script = _nodeGenerator.CreateNode(new Node { Id = "pikachu" });
+            var script = _nodeGenerator.Create(new Node { Id = "pikachu" });
 
             Assert.Equal("CREATE (pikachu)", script);
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "With one label")]
         public void WithOneLabel()
         {
-            var script = _nodeGenerator.CreateNode(new Node
+            var script = _nodeGenerator.Create(new Node
             {
                 Labels = new List<string> { "Pokemon" }
             });
@@ -45,11 +45,11 @@ namespace Cypher.ScriptGenerator.Test.Generators
             Assert.Equal("CREATE (:Pokemon)", script);
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "With multiple labels")]
         public void WithMultipleLabels()
         {
-            var script = _nodeGenerator.CreateNode(new Node
+            var script = _nodeGenerator.Create(new Node
             {
                 Labels = new List<string> { "Pokemon", "Electric" }
             });
@@ -57,11 +57,11 @@ namespace Cypher.ScriptGenerator.Test.Generators
             Assert.Equal("CREATE (:Pokemon:Electric)", script);
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "With string property")]
         public void WithStringProperty()
         {
-            var script = _nodeGenerator.CreateNode(new Node
+            var script = _nodeGenerator.Create(new Node
             {
                 Properties = new Dictionary<string, object>
                 {
@@ -72,11 +72,11 @@ namespace Cypher.ScriptGenerator.Test.Generators
             Assert.Equal("CREATE ( {name:\"Pikachu\"})", script);
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "With int tproperty")]
         public void WithIntProperty()
         {
-            var script = _nodeGenerator.CreateNode(new Node
+            var script = _nodeGenerator.Create(new Node
             {
                 Properties = new Dictionary<string, object>
                 {
@@ -87,11 +87,11 @@ namespace Cypher.ScriptGenerator.Test.Generators
             Assert.Equal("CREATE ( {number:12})", script);
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "With decimal tproperty")]
         public void WithDecimalProperty()
         {
-            var script = _nodeGenerator.CreateNode(new Node
+            var script = _nodeGenerator.Create(new Node
             {
                 Properties = new Dictionary<string, object>
                 {
@@ -102,11 +102,11 @@ namespace Cypher.ScriptGenerator.Test.Generators
             Assert.Equal("CREATE ( {price:12.89})", script);
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "With float property")]
         public void WithFloatProperty()
         {
-            var script = _nodeGenerator.CreateNode(new Node
+            var script = _nodeGenerator.Create(new Node
             {
                 Properties = new Dictionary<string, object>
                 {
@@ -117,11 +117,11 @@ namespace Cypher.ScriptGenerator.Test.Generators
             Assert.Equal("CREATE ( {price:12.89})", script);
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "With double property")]
         public void WithDoubleProperty()
         {
-            var script = _nodeGenerator.CreateNode(new Node
+            var script = _nodeGenerator.Create(new Node
             {
                 Properties = new Dictionary<string, object>
                 {
@@ -132,12 +132,12 @@ namespace Cypher.ScriptGenerator.Test.Generators
             Assert.Equal("CREATE ( {price:12.89})", script);
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "With long property")]
         public void WithLongProperty()
         {
             long price = 12;
-            var script = _nodeGenerator.CreateNode(new Node
+            var script = _nodeGenerator.Create(new Node
             {
                 Properties = new Dictionary<string, object>
                 {
@@ -148,11 +148,11 @@ namespace Cypher.ScriptGenerator.Test.Generators
             Assert.Equal("CREATE ( {price:12})", script);
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "With datetime property")]
         public void WithDateTimeProperty()
         {
-            var script = _nodeGenerator.CreateNode(new Node
+            var script = _nodeGenerator.Create(new Node
             {
                 Properties = new Dictionary<string, object>
                 {
@@ -163,11 +163,11 @@ namespace Cypher.ScriptGenerator.Test.Generators
             Assert.Equal("CREATE ( {date:datetime({year:2019, month:5, day:13, hour:16, minute:18, second:50})})", script);
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "With bool property")]
         public void WithBoolProperty()
         {
-            var script = _nodeGenerator.CreateNode(new Node
+            var script = _nodeGenerator.Create(new Node
             {
                 Properties = new Dictionary<string, object>
                 {
@@ -178,11 +178,11 @@ namespace Cypher.ScriptGenerator.Test.Generators
             Assert.Equal("CREATE ( {active:True})", script);
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "With multiple properties")]
         public void WithMultipleProperties()
         {
-            var script = _nodeGenerator.CreateNode(new Node
+            var script = _nodeGenerator.Create(new Node
             {
                 Properties = new Dictionary<string, object>
                 {
@@ -194,11 +194,11 @@ namespace Cypher.ScriptGenerator.Test.Generators
             Assert.Equal("CREATE ( {price:51.50, description:\"glue\"})", script);
         }
 
-        [Trait("NodeGenerator", "CreateNode")]
+        [Trait("NodeGenerator", "Create a node")]
         [Fact(DisplayName = "With id, label and property")]
         public void WithIdAndLabelAndProperty()
         {
-            var script = _nodeGenerator.CreateNode(new Node
+            var script = _nodeGenerator.Create(new Node
             {
                 Id = "pikachu",
                 Labels = new List<string> { "Pokemon", "Electric" },
@@ -213,11 +213,11 @@ namespace Cypher.ScriptGenerator.Test.Generators
         }
 
 
-        [Trait("NodeGenerator", "CreateNodes")]
+        [Trait("NodeGenerator", "Create multiple nodes")]
         [Fact(DisplayName = "Multiple nodes")]
         public void MultipleNodes()
         {
-            var script = _nodeGenerator.CreateNodes(
+            var script = _nodeGenerator.Create(
                 new List<Node>
                 {
                     new Node
