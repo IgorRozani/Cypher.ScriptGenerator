@@ -6,8 +6,10 @@ namespace Cypher.ScriptGenerator.Interfaces
 
     public interface IRelationshipGenerator
     {
-        string Create(IList<Relationship> relationships);
+        string Create(IList<CreateRelationship> relationships);
 
-        string Create(Relationship relationship);
+        string Create(CreateRelationship relationship);
+
+        string CreateAndSearch(CreateAndSearchRelationship relationship);
     }
 }

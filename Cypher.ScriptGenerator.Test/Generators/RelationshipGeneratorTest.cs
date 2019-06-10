@@ -20,7 +20,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
         public void WithoutPropertiesAndLabels()
         {
             var script = _relationshipGenerator.Create(
-                    new Relationship
+                    new CreateRelationship
                     {
                         NodeId1 = "evee",
                         NodeId2 = "vaporeon",
@@ -34,7 +34,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
         public void WithOneLabel()
         {
             var script = _relationshipGenerator.Create(
-                    new Relationship
+                    new CreateRelationship
                     {
                         NodeId1 = "evee",
                         NodeId2 = "vaporeon",
@@ -49,7 +49,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
         public void WithMultipleLabels()
         {
             var script = _relationshipGenerator.Create(
-                    new Relationship
+                    new CreateRelationship
                     {
                         NodeId1 = "evee",
                         NodeId2 = "vaporeon",
@@ -63,7 +63,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
         [Fact(DisplayName = "With string property")]
         public void WithStringProperty()
         {
-            var script = _relationshipGenerator.Create(new Relationship
+            var script = _relationshipGenerator.Create(new CreateRelationship
             {
                 NodeId1 = "evee",
                 NodeId2 = "vaporeon",
@@ -80,7 +80,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
         [Fact(DisplayName = "With int property")]
         public void WithIntProperty()
         {
-            var script = _relationshipGenerator.Create(new Relationship
+            var script = _relationshipGenerator.Create(new CreateRelationship
             {
                 NodeId1 = "evee",
                 NodeId2 = "vaporeon",
@@ -97,7 +97,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
         [Fact(DisplayName = "With decimal tproperty")]
         public void WithDecimalProperty()
         {
-            var script = _relationshipGenerator.Create(new Relationship
+            var script = _relationshipGenerator.Create(new CreateRelationship
             {
                 NodeId1 = "evee",
                 NodeId2 = "vaporeon",
@@ -114,7 +114,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
         [Fact(DisplayName = "With float property")]
         public void WithFloatProperty()
         {
-            var script = _relationshipGenerator.Create(new Relationship
+            var script = _relationshipGenerator.Create(new CreateRelationship
             {
                 NodeId1 = "evee",
                 NodeId2 = "vaporeon",
@@ -131,7 +131,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
         [Fact(DisplayName = "With double property")]
         public void WithDoubleProperty()
         {
-            var script = _relationshipGenerator.Create(new Relationship
+            var script = _relationshipGenerator.Create(new CreateRelationship
             {
                 NodeId1 = "evee",
                 NodeId2 = "vaporeon",
@@ -149,7 +149,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
         public void WithLongProperty()
         {
             long price = 12;
-            var script = _relationshipGenerator.Create(new Relationship
+            var script = _relationshipGenerator.Create(new CreateRelationship
             {
                 NodeId1 = "evee",
                 NodeId2 = "vaporeon",
@@ -166,7 +166,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
         [Fact(DisplayName = "With datetime property")]
         public void WithDateTimeProperty()
         {
-            var script = _relationshipGenerator.Create(new Relationship
+            var script = _relationshipGenerator.Create(new CreateRelationship
             {
                 NodeId1 = "evee",
                 NodeId2 = "vaporeon",
@@ -183,7 +183,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
         [Fact(DisplayName = "With bool property")]
         public void WithBoolProperty()
         {
-            var script = _relationshipGenerator.Create(new Relationship
+            var script = _relationshipGenerator.Create(new CreateRelationship
             {
                 NodeId1 = "evee",
                 NodeId2 = "vaporeon",
@@ -200,7 +200,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
         [Fact(DisplayName = "With multiple properties")]
         public void WithMultipleProperties()
         {
-            var script = _relationshipGenerator.Create(new Relationship
+            var script = _relationshipGenerator.Create(new CreateRelationship
             {
                 NodeId1 = "evee",
                 NodeId2 = "vaporeon",
@@ -218,7 +218,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
         [Fact(DisplayName = "With id, label and property")]
         public void WithIdAndLabelAndProperty()
         {
-            var script = _relationshipGenerator.Create(new Relationship
+            var script = _relationshipGenerator.Create(new CreateRelationship
             {
                 NodeId1 = "evee",
                 NodeId2 = "vaporeon",
@@ -238,8 +238,8 @@ namespace Cypher.ScriptGenerator.Test.Generators
         public void MultipleNodes()
         {
             var script = _relationshipGenerator.Create(
-                new List<Relationship> {
-                    new Relationship
+                new List<CreateRelationship> {
+                    new CreateRelationship
                     {
                         NodeId1 = "evee",
                         NodeId2 = "vaporeon",
@@ -250,7 +250,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                             { "hasOtherForms", false }
                         }
                     },
-                    new Relationship
+                    new CreateRelationship
                     {
                         NodeId1 = "evee",
                         NodeId2 = "jolteon",
@@ -264,6 +264,25 @@ namespace Cypher.ScriptGenerator.Test.Generators
                 });
 
             Assert.Equal("CREATE \r\n(evee)-[:Evolve {stone:\"Water stone\", hasOtherForms:False}]->(vaporeon), \r\n(evee)-[:Evolve {stone:\"Thunder stone\", hasOtherForms:False}]->(jolteon)", script);
+        }
+
+        [Trait("RelationshipGenerator", "Create and search relationship")]
+        [Fact(DisplayName = "Two nodes with property")]
+        public void TwoNodesWithProperty()
+        {
+            var script = _relationshipGenerator.CreateAndSearch(new CreateAndSearchRelationship
+            {
+                Node1 = new Node { Properties = new Dictionary<string, object> { { "name", "Evee" } } },
+                Node2 = new Node { Properties = new Dictionary<string, object> { { "name", "Vaporeon" } } },
+                Labels = new List<string> { "Evolve", "Stone" },
+                Properties = new Dictionary<string, object>
+                    {
+                        { "stone", "Water stone" },
+                        { "hasOtherForms", false }
+                    }
+            });
+
+            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\r\nCREATE (n1)-[:Evolve:Stone {stone:\"Water stone\", hasOtherForms:False}]->(n2)", script);
         }
     }
 }

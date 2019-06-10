@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cypher.ScriptGenerator.Models;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -50,6 +51,21 @@ namespace Cypher.ScriptGenerator.Generators
             }
 
             return scriptBuilder.Append("}").ToString();
+        }
+
+        protected string GenerateNode(Node node)
+        {
+            var scriptBuilder = new StringBuilder();
+            scriptBuilder.Append('(').Append(node.Id);
+
+            scriptBuilder.Append(GetLabels(node.Labels));
+
+            if (node.Properties.Any())
+                scriptBuilder.Append(GetProperties(node.Properties));
+
+            scriptBuilder.Append(")");
+
+            return scriptBuilder.ToString();
         }
     }
 }

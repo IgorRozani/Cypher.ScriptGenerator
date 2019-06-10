@@ -24,21 +24,5 @@ namespace Cypher.ScriptGenerator.Generators
 
         public string Create(Node node) =>
             CREATE + GenerateNode(node);
-
-        private string GenerateNode(Node node)
-        {
-            var scriptBuilder = new StringBuilder();
-            scriptBuilder.Append('(').Append(node.Id);
-
-            scriptBuilder.Append(GetLabels(node.Labels));
-
-            if (node.Properties.Any())
-                scriptBuilder.Append(GetProperties(node.Properties));
-
-            scriptBuilder.Append(")");
-
-            return scriptBuilder.ToString();
-        }
-
     }
 }
