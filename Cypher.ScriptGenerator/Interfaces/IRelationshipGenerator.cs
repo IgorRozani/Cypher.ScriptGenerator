@@ -11,5 +11,7 @@ namespace Cypher.ScriptGenerator.Interfaces
         string Create(CreateRelationship relationship);
 
         string CreateAndSearch(CreateAndSearchRelationship relationship);
+
+        string CreateAndSearch(IList<CreateAndSearchRelationship> relationships);
     }
 }

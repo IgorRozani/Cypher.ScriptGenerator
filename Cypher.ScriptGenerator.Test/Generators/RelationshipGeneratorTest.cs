@@ -284,5 +284,38 @@ namespace Cypher.ScriptGenerator.Test.Generators
 
             Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\r\nCREATE (n1)-[:Evolve:Stone {stone:\"Water stone\", hasOtherForms:False}]->(n2)", script);
         }
+
+
+        [Trait("RelationshipGenerator", "Create and search multiple relationships")]
+        [Fact(DisplayName = "Two nodes with property")]
+        public void MultiplesNodesAndRelationships()
+        {
+            var script = _relationshipGenerator.CreateAndSearch(new List<CreateAndSearchRelationship>{
+                new CreateAndSearchRelationship
+                {
+                    Node1 = new Node { Properties = new Dictionary<string, object> { { "name", "Evee" } } },
+                    Node2 = new Node { Properties = new Dictionary<string, object> { { "name", "Vaporeon" } } },
+                    Labels = new List<string> { "Evolve", "Stone" },
+                    Properties = new Dictionary<string, object>
+                        {
+                            { "stone", "Water stone" },
+                            { "hasOtherForms", false }
+                        }
+                },
+                new CreateAndSearchRelationship
+                {
+                    Node1 = new Node { Properties = new Dictionary<string, object> { { "name", "Evee" } } },
+                    Node2 = new Node { Properties = new Dictionary<string, object> { { "name", "Jolteon" } } },
+                    Labels = new List<string> { "Evolve", "Stone" },
+                    Properties = new Dictionary<string, object>
+                        {
+                            { "stone", "Light stone" },
+                            { "hasOtherForms", false }
+                        }
+                }
+            });
+
+            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\r\nCREATE (n1)-[:Evolve:Stone {stone:\"Water stone\", hasOtherForms:False}]->(n2)\r\nMATCH (n1 {name:\"Evee\"}), (n2 {name:\"Jolteon\"})\r\nCREATE (n1)-[:Evolve:Stone {stone:\"Light stone\", hasOtherForms:False}]->(n2)\r\n", script);
+        }
     }
 }

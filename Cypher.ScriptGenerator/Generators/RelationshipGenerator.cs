@@ -67,5 +67,15 @@ namespace Cypher.ScriptGenerator.Generators
 
             return scriptBuilder.ToString();
         }
+
+        public string CreateAndSearch(IList<CreateAndSearchRelationship> relationships)
+        {
+            var scriptBuilder = new StringBuilder();
+
+            foreach (var relationship in relationships)
+                scriptBuilder.AppendLine(CreateAndSearch(relationship));
+
+            return scriptBuilder.ToString();
+        }
     }
 }
