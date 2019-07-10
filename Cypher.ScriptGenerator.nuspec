@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Cypher.ScriptGenerator</id>
+    <version>1.0.0</version>
+    <authors>Igor Rozani</authors>
+    <owners>Igor Rozani</owners>
+    <licenseUrl>https://github.com/IgorRozani/Cypher.ScriptGenerator/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://igorrozani.github.io/Cypher.ScriptGenerator/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A script generator for cypher</description>
+  </metadata>
+</package>
