@@ -3,6 +3,13 @@ A script generator for cypher
 
 This project is based in the [Cypher manual from the Neo4j site](https://neo4j.com/docs/cypher-manual/3.5/).
 
+## Nuget.org
+Include this in your project using the nuget package: [Cypher.ScriptGenerator](https://www.nuget.org/packages/Cypher.ScriptGenerator/).
+
+```
+Install-Package Cypher.ScriptGenerator
+```
+
 ## How to use
 
 The package has two main files, the RelationshipGenerator and NodeGenerator.
