@@ -55,6 +55,7 @@ To create a relationship utilize the class RelationshipGenerator or the interfac
 #### Create
 
 Both Create methods recieve the CreateRelationship class, that represents the data from the relationship.
+
 | Property   | Type                       |Description|
 |------------|----------------------------|-----------|
 | NodeId1    | string                     |Node id to be used in the left side from the relationship|
@@ -65,6 +66,7 @@ Both Create methods recieve the CreateRelationship class, that represents the da
 #### CreateAndSearch
 
 Both CreateAndSearch methods recieve the CreateAndSearchRelationship class, that represents the data from the relationship.
+
 | Property   | Type                       |Description|
 |------------|----------------------------|-----------|
 | Node1      | Node                       |Node id to be searched and used in the left side from the relationship|
