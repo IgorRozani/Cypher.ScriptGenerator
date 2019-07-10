@@ -73,6 +73,7 @@ Both CreateAndSearch methods recieve the CreateAndSearchRelationship class, that
 | Node2      | Node                       |Node id to be searched and used in the right side from the relationship|
 | Labels     | List\<string\>               |Node labels|
 | Properties | Dictionary\<string, object\> |The node properties|
+
 The class node utilized in this method is the same class utilized in the method Create from the class [NodeGenerator](#create-nodes).
 
 This project has unity tests and they cover all the cases, check it to see more details. [Click here for the node tests](https://github.com/IgorRozani/Cypher.ScriptGenerator/blob/master/Cypher.ScriptGenerator.Test/Generators/NodeGeneratorTest.cs) and [here for the relationship tests](https://github.com/IgorRozani/Cypher.ScriptGenerator/blob/master/Cypher.ScriptGenerator.Test/Generators/RelationshipGeneratorTest.cs).
