@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Igor Rozani</Authors>
+    <Company>IgorSoft</Company>
+    <PackageId>Cypher.ScriptGenerator</PackageId>
   </PropertyGroup>
 
 </Project>
