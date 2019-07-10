@@ -5,6 +5,12 @@
     <Authors>Igor Rozani</Authors>
     <Company>IgorSoft</Company>
     <PackageId>Cypher.ScriptGenerator</PackageId>
+    <Version>1.0.1</Version>
+    <Description>A script generator for cypher</Description>
+    <PackageProjectUrl>https://igorrozani.github.io/Cypher.ScriptGenerator/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/IgorRozani/Cypher.ScriptGenerator</RepositoryUrl>
+    <PackageTags>cypher, neo4j</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>

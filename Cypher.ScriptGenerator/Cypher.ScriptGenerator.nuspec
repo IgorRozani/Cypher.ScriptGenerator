@@ -2,10 +2,10 @@
 <package >
   <metadata>
     <id>Cypher.ScriptGenerator</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <authors>Igor Rozani</authors>
     <owners>Igor Rozani</owners>
-    <licenseUrl>https://github.com/IgorRozani/Cypher.ScriptGenerator/blob/master/LICENSE</licenseUrl>
+    <license>https://github.com/IgorRozani/Cypher.ScriptGenerator/blob/master/LICENSE</license>
     <projectUrl>https://igorrozani.github.io/Cypher.ScriptGenerator/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A script generator for cypher</description>
