@@ -5,11 +5,11 @@
     {
         public CreateAndSearchRelationship() : base()
         {
-            Node1 = new Node();
-            Node2 = new Node();
+            NodeLeft = new Node();
+            NodeRight = new Node();
         }
 
-        public Node Node1 { get; set; }
-        public Node Node2 { get; set; }
+        public Node NodeLeft { get; set; }
+        public Node NodeRight { get; set; }
     }
 }

@@ -24,5 +24,39 @@ namespace Cypher.ScriptGenerator.Generators
 
         public string Create(Node node) =>
             CREATE + GenerateNode(node);
+
+        public string Merge(IList<Node> nodes)
+        {
+            var scriptStringBuilder = new StringBuilder();
+            scriptStringBuilder.AppendLine(MERGE);
+            foreach (var node in nodes)
+            {
+                scriptStringBuilder.Append(GenerateNode(node));
+                if (node != nodes.LastOrDefault())
+                    scriptStringBuilder.AppendLine(", ");
+            }
+            return scriptStringBuilder.ToString();
+        }
+
+        public string Merge(Node node)
+        {
+            var sb = new StringBuilder(MERGE + GenerateNode(node));
+            AppendOnCreateAndMatch(sb, node.Id, node.OnCreateProperties, node.OnMatchProperties);
+            return sb.ToString();
+        }
+
+        public string Delete(IList<Node> nodes, bool detach = true)
+        {
+            var scriptStringBuilder = new StringBuilder();
+            foreach (var node in nodes)
+                scriptStringBuilder.AppendLine(Delete(node, detach));
+            return scriptStringBuilder.ToString();
+        }
+
+        public string Delete(Node node, bool detach = true)
+        {
+            var deleteCommand = detach ? DETACH_DELETE : DELETE;
+            return MATCH + GenerateNode(node) + " " + deleteCommand + node.Id;
+        }
     }
 }
