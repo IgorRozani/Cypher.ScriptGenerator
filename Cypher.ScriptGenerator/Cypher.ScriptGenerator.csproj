@@ -11,6 +11,7 @@
     <RepositoryUrl>https://github.com/IgorRozani/Cypher.ScriptGenerator</RepositoryUrl>
     <PackageTags>cypher, neo4j</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>
 ## v1.1.0
 
@@ -29,5 +30,9 @@
 - Target framework updated to .NET 9.0
     </PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>
