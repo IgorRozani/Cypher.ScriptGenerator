@@ -11,12 +11,12 @@ namespace Cypher.ScriptGenerator.Generators
         public string Create(IList<CreateRelationship> relationships)
         {
             var scriptStringBuilder = new StringBuilder();
-            scriptStringBuilder.AppendLine(CREATE);
+            scriptStringBuilder.Append(CREATE + "\n");
             foreach (var relationship in relationships)
             {
                 scriptStringBuilder.Append(GenerateRelationship(relationship));
                 if (relationship != relationships.LastOrDefault())
-                    scriptStringBuilder.AppendLine(", ");
+                    scriptStringBuilder.Append(", \n");
             }
             return scriptStringBuilder.ToString();
         }
@@ -48,7 +48,7 @@ namespace Cypher.ScriptGenerator.Generators
             if (string.IsNullOrEmpty(relationship.NodeRight.Id))
                 relationship.NodeRight.Id = "n2";
 
-            scriptBuilder.Append("MATCH ").Append(GenerateNode(relationship.NodeLeft)).Append(", ").AppendLine(GenerateNode(relationship.NodeRight)).Append(CREATE).Append(GenerateRelationship(relationship));
+            scriptBuilder.Append("MATCH ").Append(GenerateNode(relationship.NodeLeft)).Append(", ").Append(GenerateNode(relationship.NodeRight)).Append("\n").Append(CREATE).Append(GenerateRelationship(relationship));
 
             return scriptBuilder.ToString();
         }
@@ -73,7 +73,7 @@ namespace Cypher.ScriptGenerator.Generators
             var scriptBuilder = new StringBuilder();
 
             foreach (var relationship in relationships)
-                scriptBuilder.AppendLine(CreateAndSearch(relationship));
+                scriptBuilder.Append(CreateAndSearch(relationship) + "\n");
 
             return scriptBuilder.ToString();
         }
@@ -81,12 +81,12 @@ namespace Cypher.ScriptGenerator.Generators
         public string Merge(IList<CreateRelationship> relationships)
         {
             var scriptStringBuilder = new StringBuilder();
-            scriptStringBuilder.AppendLine(MERGE);
+            scriptStringBuilder.Append(MERGE + "\n");
             foreach (var relationship in relationships)
             {
                 scriptStringBuilder.Append(GenerateRelationship(relationship));
                 if (relationship != relationships.LastOrDefault())
-                    scriptStringBuilder.AppendLine(", ");
+                    scriptStringBuilder.Append(", \n");
             }
             return scriptStringBuilder.ToString();
         }
@@ -116,7 +116,7 @@ namespace Cypher.ScriptGenerator.Generators
                               || relationship.OnMatchProperties?.Any() == true;
 
             var scriptBuilder = new StringBuilder();
-            scriptBuilder.Append(MATCH).Append(GenerateNode(relationship.NodeLeft)).Append(", ").AppendLine(GenerateNode(relationship.NodeRight))
+            scriptBuilder.Append(MATCH).Append(GenerateNode(relationship.NodeLeft)).Append(", ").Append(GenerateNode(relationship.NodeRight)).Append("\n")
                          .Append(MERGE).Append(needsVariable
                              ? GenerateRelationshipWithVariable(relationship, relationship.NodeLeft.Id, relationship.NodeRight.Id)
                              : GenerateRelationship(relationship));
@@ -130,7 +130,7 @@ namespace Cypher.ScriptGenerator.Generators
             var scriptBuilder = new StringBuilder();
 
             foreach (var relationship in relationships)
-                scriptBuilder.AppendLine(MergeAndSearch(relationship));
+                scriptBuilder.Append(MergeAndSearch(relationship) + "\n");
 
             return scriptBuilder.ToString();
         }
@@ -139,7 +139,7 @@ namespace Cypher.ScriptGenerator.Generators
         {
             var scriptBuilder = new StringBuilder();
             foreach (var relationship in relationships)
-                scriptBuilder.AppendLine(Delete(relationship));
+                scriptBuilder.Append(Delete(relationship) + "\n");
             return scriptBuilder.ToString();
         }
 
@@ -154,7 +154,7 @@ namespace Cypher.ScriptGenerator.Generators
                 relationship.NodeRight.Id = "n2";
 
             var scriptBuilder = new StringBuilder();
-            scriptBuilder.Append(MATCH).Append(GenerateNode(relationship.NodeLeft)).Append(", ").AppendLine(GenerateNode(relationship.NodeRight))
+            scriptBuilder.Append(MATCH).Append(GenerateNode(relationship.NodeLeft)).Append(", ").Append(GenerateNode(relationship.NodeRight)).Append("\n")
                          .Append(MATCH).Append(GenerateRelationshipWithVariable(relationship, relationship.NodeLeft.Id, relationship.NodeRight.Id))
                          .Append(" ").Append(DELETE).Append("r");
 
@@ -166,7 +166,7 @@ namespace Cypher.ScriptGenerator.Generators
             var scriptBuilder = new StringBuilder();
 
             foreach (var relationship in relationships)
-                scriptBuilder.AppendLine(DeleteAndSearch(relationship));
+                scriptBuilder.Append(DeleteAndSearch(relationship) + "\n");
 
             return scriptBuilder.ToString();
         }

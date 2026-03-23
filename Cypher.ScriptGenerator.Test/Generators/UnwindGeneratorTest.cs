@@ -28,7 +28,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
             );
 
             Assert.Equal(
-                "UNWIND $nodes AS row\r\nMERGE (n:Person {id: row.id})\r\nSET n.name = row.name, n.age = row.age",
+                "UNWIND $nodes AS row\nMERGE (n:Person {id: row.id})\nSET n.name = row.name, n.age = row.age",
                 script);
         }
 
@@ -44,7 +44,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
             );
 
             Assert.Equal(
-                "UNWIND $nodes AS row\r\nMERGE (n:Person {id: row.id})",
+                "UNWIND $nodes AS row\nMERGE (n:Person {id: row.id})",
                 script);
         }
 
@@ -62,7 +62,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
             );
 
             Assert.Equal(
-                "UNWIND $nodes AS row\r\nMERGE (n:Person {id: row.id})\r\nON CREATE SET n.createdAt = row.createdAt",
+                "UNWIND $nodes AS row\nMERGE (n:Person {id: row.id})\nON CREATE SET n.createdAt = row.createdAt",
                 script);
         }
 
@@ -80,7 +80,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
             );
 
             Assert.Equal(
-                "UNWIND $nodes AS row\r\nMERGE (n:Person {id: row.id})\r\nON MATCH SET n.updatedAt = row.updatedAt",
+                "UNWIND $nodes AS row\nMERGE (n:Person {id: row.id})\nON MATCH SET n.updatedAt = row.updatedAt",
                 script);
         }
 
@@ -98,7 +98,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
             );
 
             Assert.Equal(
-                "UNWIND $nodes AS row\r\nMERGE (n:Person {id: row.id})\r\nSET n.name = row.name\r\nON CREATE SET n.createdAt = row.createdAt\r\nON MATCH SET n.updatedAt = row.updatedAt",
+                "UNWIND $nodes AS row\nMERGE (n:Person {id: row.id})\nSET n.name = row.name\nON CREATE SET n.createdAt = row.createdAt\nON MATCH SET n.updatedAt = row.updatedAt",
                 script);
         }
 
@@ -114,7 +114,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
             );
 
             Assert.Equal(
-                "UNWIND $items AS item\r\nMERGE (n:Product {sku: item.sku})\r\nSET n.name = item.name, n.price = item.price",
+                "UNWIND $items AS item\nMERGE (n:Product {sku: item.sku})\nSET n.name = item.name, n.price = item.price",
                 script);
         }
 
@@ -134,7 +134,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
             );
 
             Assert.Equal(
-                "UNWIND $rows AS row\r\nMATCH (a:Person {id: row.id})\r\nMATCH (b:Company {id: row.id})\r\nMERGE (a)-[:WORKS_AT]->(b)",
+                "UNWIND $rows AS row\nMATCH (a:Person {id: row.id})\nMATCH (b:Company {id: row.id})\nMERGE (a)-[:WORKS_AT]->(b)",
                 script);
         }
 
@@ -152,7 +152,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
             );
 
             Assert.Equal(
-                "UNWIND $rows AS row\r\nMATCH (a:Person {id: row.id})\r\nMATCH (b:Company {id: row.id})\r\nMERGE (a)-[r:WORKS_AT]->(b)\r\nON CREATE SET r.since = row.since",
+                "UNWIND $rows AS row\nMATCH (a:Person {id: row.id})\nMATCH (b:Company {id: row.id})\nMERGE (a)-[r:WORKS_AT]->(b)\nON CREATE SET r.since = row.since",
                 script);
         }
 
@@ -170,7 +170,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
             );
 
             Assert.Equal(
-                "UNWIND $rows AS row\r\nMATCH (a:Person {id: row.id})\r\nMATCH (b:Company {id: row.id})\r\nMERGE (a)-[r:WORKS_AT]->(b)\r\nON MATCH SET r.updatedAt = row.updatedAt",
+                "UNWIND $rows AS row\nMATCH (a:Person {id: row.id})\nMATCH (b:Company {id: row.id})\nMERGE (a)-[r:WORKS_AT]->(b)\nON MATCH SET r.updatedAt = row.updatedAt",
                 script);
         }
 
@@ -188,7 +188,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
             );
 
             Assert.Equal(
-                "UNWIND $rows AS row\r\nMATCH (a:Person {id: row.id})\r\nMATCH (b:Company {id: row.id})\r\nMERGE (a)-[r:WORKS_AT]->(b)\r\nON CREATE SET r.since = row.since\r\nON MATCH SET r.updatedAt = row.updatedAt",
+                "UNWIND $rows AS row\nMATCH (a:Person {id: row.id})\nMATCH (b:Company {id: row.id})\nMERGE (a)-[r:WORKS_AT]->(b)\nON CREATE SET r.since = row.since\nON MATCH SET r.updatedAt = row.updatedAt",
                 script);
         }
 

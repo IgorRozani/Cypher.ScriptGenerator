@@ -18,14 +18,14 @@ namespace Cypher.ScriptGenerator.Generators
                                  IList<string> onCreateProperties, IList<string> onMatchProperties)
         {
             var sb = new StringBuilder();
-            sb.AppendLine($"UNWIND {unwind.Parameter} AS {unwind.Alias}");
+            sb.Append($"UNWIND {unwind.Parameter} AS {unwind.Alias}\n");
             sb.Append($"MERGE (n:{label}");
             sb.Append(GetPropertyReferences(new[] { matchProperty }, unwind.Alias));
             sb.Append(")");
 
             if (setProperties?.Any() == true)
             {
-                sb.AppendLine();
+                sb.Append("\n");
                 sb.Append("SET ");
                 sb.Append(string.Join(", ", setProperties.Select(p => $"n.{p} = {unwind.Alias}.{p}")));
             }
@@ -51,9 +51,9 @@ namespace Cypher.ScriptGenerator.Generators
             bool needsVariable = onCreateProperties?.Any() == true || onMatchProperties?.Any() == true;
 
             var sb = new StringBuilder();
-            sb.AppendLine($"UNWIND {unwind.Parameter} AS {unwind.Alias}");
-            sb.AppendLine($"MATCH (a:{leftLabel}{GetPropertyReferences(new[] { leftMatchProperty }, unwind.Alias)})");
-            sb.AppendLine($"MATCH (b:{rightLabel}{GetPropertyReferences(new[] { rightMatchProperty }, unwind.Alias)})");
+            sb.Append($"UNWIND {unwind.Parameter} AS {unwind.Alias}\n");
+            sb.Append($"MATCH (a:{leftLabel}{GetPropertyReferences(new[] { leftMatchProperty }, unwind.Alias)})\n");
+            sb.Append($"MATCH (b:{rightLabel}{GetPropertyReferences(new[] { rightMatchProperty }, unwind.Alias)})\n");
 
             if (needsVariable)
                 sb.Append($"MERGE (a)-[r:{relationshipLabel}]->(b)");
@@ -70,14 +70,14 @@ namespace Cypher.ScriptGenerator.Generators
         {
             if (onCreateProperties?.Any() == true)
             {
-                sb.AppendLine();
+                sb.Append("\n");
                 sb.Append("ON CREATE SET ");
                 sb.Append(string.Join(", ", onCreateProperties.Select(p => $"{nodeAlias}.{p} = {rowAlias}.{p}")));
             }
 
             if (onMatchProperties?.Any() == true)
             {
-                sb.AppendLine();
+                sb.Append("\n");
                 sb.Append("ON MATCH SET ");
                 sb.Append(string.Join(", ", onMatchProperties.Select(p => $"{nodeAlias}.{p} = {rowAlias}.{p}")));
             }

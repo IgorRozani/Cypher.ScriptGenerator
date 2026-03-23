@@ -265,7 +265,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                     },
                 });
 
-            Assert.Equal("CREATE \r\n(evee)-[:Evolve {stone:\"Water stone\", hasOtherForms:False}]->(vaporeon), \r\n(evee)-[:Evolve {stone:\"Thunder stone\", hasOtherForms:False}]->(jolteon)", script);
+            Assert.Equal("CREATE \n(evee)-[:Evolve {stone:\"Water stone\", hasOtherForms:False}]->(vaporeon), \n(evee)-[:Evolve {stone:\"Thunder stone\", hasOtherForms:False}]->(jolteon)", script);
         }
 
         #endregion
@@ -288,7 +288,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                     }
             });
 
-            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\r\nCREATE (n1)-[:Evolve:Stone {stone:\"Water stone\", hasOtherForms:False}]->(n2)", script);
+            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\nCREATE (n1)-[:Evolve:Stone {stone:\"Water stone\", hasOtherForms:False}]->(n2)", script);
         }
 
         [Trait("RelationshipGenerator", "Create and Search")]
@@ -320,7 +320,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                 }
             });
 
-            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\r\nCREATE (n1)-[:Evolve:Stone {stone:\"Water stone\", hasOtherForms:False}]->(n2)\r\nMATCH (n1 {name:\"Evee\"}), (n2 {name:\"Jolteon\"})\r\nCREATE (n1)-[:Evolve:Stone {stone:\"Light stone\", hasOtherForms:False}]->(n2)\r\n", script);
+            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\nCREATE (n1)-[:Evolve:Stone {stone:\"Water stone\", hasOtherForms:False}]->(n2)\nMATCH (n1 {name:\"Evee\"}), (n2 {name:\"Jolteon\"})\nCREATE (n1)-[:Evolve:Stone {stone:\"Light stone\", hasOtherForms:False}]->(n2)\n", script);
         }
 
         #endregion
@@ -413,7 +413,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                     new CreateRelationship { NodeIdLeft = "evee", NodeIdRight = "jolteon", Labels = new List<string> { "Evolve" } },
                 });
 
-            Assert.Equal("MERGE \r\n(evee)-[:Evolve]->(vaporeon), \r\n(evee)-[:Evolve]->(jolteon)", script);
+            Assert.Equal("MERGE \n(evee)-[:Evolve]->(vaporeon), \n(evee)-[:Evolve]->(jolteon)", script);
         }
 
         #endregion
@@ -432,7 +432,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                 Properties = new Dictionary<string, object> { { "stone", "Water stone" } }
             });
 
-            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\r\nMERGE (n1)-[:Evolve {stone:\"Water stone\"}]->(n2)", script);
+            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\nMERGE (n1)-[:Evolve {stone:\"Water stone\"}]->(n2)", script);
         }
 
         [Trait("RelationshipGenerator", "Merge and Search")]
@@ -447,7 +447,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                 OnCreateProperties = new Dictionary<string, object> { { "since", 2020 } }
             });
 
-            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\r\nMERGE (n1)-[r:Evolve]->(n2) ON CREATE SET r.since = 2020", script);
+            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\nMERGE (n1)-[r:Evolve]->(n2) ON CREATE SET r.since = 2020", script);
         }
 
         [Trait("RelationshipGenerator", "Merge and Search")]
@@ -463,7 +463,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                 OnMatchProperties = new Dictionary<string, object> { { "updated", "2024" } }
             });
 
-            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\r\nMERGE (n1)-[r:Evolve]->(n2) ON CREATE SET r.since = 2020 ON MATCH SET r.updated = \"2024\"", script);
+            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\nMERGE (n1)-[r:Evolve]->(n2) ON CREATE SET r.since = 2020 ON MATCH SET r.updated = \"2024\"", script);
         }
 
         [Trait("RelationshipGenerator", "Merge and Search")]
@@ -486,7 +486,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                 }
             });
 
-            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\r\nMERGE (n1)-[:Evolve]->(n2)\r\nMATCH (n1 {name:\"Evee\"}), (n2 {name:\"Jolteon\"})\r\nMERGE (n1)-[:Evolve]->(n2)\r\n", script);
+            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\nMERGE (n1)-[:Evolve]->(n2)\nMATCH (n1 {name:\"Evee\"}), (n2 {name:\"Jolteon\"})\nMERGE (n1)-[:Evolve]->(n2)\n", script);
         }
 
         #endregion
@@ -533,7 +533,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                     new CreateRelationship { NodeIdLeft = "evee", NodeIdRight = "jolteon",  Labels = new List<string> { "Evolve" } },
                 });
 
-            Assert.Equal("MATCH (evee)-[r:Evolve]->(vaporeon) DELETE r\r\nMATCH (evee)-[r:Evolve]->(jolteon) DELETE r\r\n", script);
+            Assert.Equal("MATCH (evee)-[r:Evolve]->(vaporeon) DELETE r\nMATCH (evee)-[r:Evolve]->(jolteon) DELETE r\n", script);
         }
 
         #endregion
@@ -551,7 +551,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                 Labels = new List<string> { "Evolve" }
             });
 
-            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\r\nMATCH (n1)-[r:Evolve]->(n2) DELETE r", script);
+            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\nMATCH (n1)-[r:Evolve]->(n2) DELETE r", script);
         }
 
         [Trait("RelationshipGenerator", "Delete and Search")]
@@ -574,7 +574,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                 }
             });
 
-            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\r\nMATCH (n1)-[r:Evolve]->(n2) DELETE r\r\nMATCH (n1 {name:\"Evee\"}), (n2 {name:\"Jolteon\"})\r\nMATCH (n1)-[r:Evolve]->(n2) DELETE r\r\n", script);
+            Assert.Equal("MATCH (n1 {name:\"Evee\"}), (n2 {name:\"Vaporeon\"})\nMATCH (n1)-[r:Evolve]->(n2) DELETE r\nMATCH (n1 {name:\"Evee\"}), (n2 {name:\"Jolteon\"})\nMATCH (n1)-[r:Evolve]->(n2) DELETE r\n", script);
         }
 
         #endregion

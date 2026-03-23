@@ -243,7 +243,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                     },
                 });
 
-            Assert.Equal("CREATE \r\n(pikachu:Pokemon:Electric {name:\"Pikachu\", number:25}), \r\n(evee:Pokemon:Normal {name:\"Evee\", number:133})", script);
+            Assert.Equal("CREATE \n(pikachu:Pokemon:Electric {name:\"Pikachu\", number:25}), \n(evee:Pokemon:Normal {name:\"Evee\", number:133})", script);
         }
 
         #endregion
@@ -373,7 +373,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                     },
                 });
 
-            Assert.Equal("MERGE \r\n(pikachu:Pokemon:Electric {name:\"Pikachu\", number:25}), \r\n(evee:Pokemon:Normal {name:\"Evee\", number:133})", script);
+            Assert.Equal("MERGE \n(pikachu:Pokemon:Electric {name:\"Pikachu\", number:25}), \n(evee:Pokemon:Normal {name:\"Evee\", number:133})", script);
         }
 
         #endregion
@@ -418,7 +418,7 @@ namespace Cypher.ScriptGenerator.Test.Generators
                     new Node { Id = "evee",    Labels = new List<string> { "Pokemon" } },
                 });
 
-            Assert.Equal("MATCH (pikachu:Pokemon) DETACH DELETE pikachu\r\nMATCH (evee:Pokemon) DETACH DELETE evee\r\n", script);
+            Assert.Equal("MATCH (pikachu:Pokemon) DETACH DELETE pikachu\nMATCH (evee:Pokemon) DETACH DELETE evee\n", script);
         }
 
         #endregion

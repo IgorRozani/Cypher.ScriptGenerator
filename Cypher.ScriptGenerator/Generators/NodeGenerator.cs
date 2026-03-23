@@ -12,12 +12,12 @@ namespace Cypher.ScriptGenerator.Generators
         public string Create(IList<Node> nodes)
         {
             var scriptStringBuilder = new StringBuilder();
-            scriptStringBuilder.AppendLine(CREATE);
+            scriptStringBuilder.Append(CREATE + "\n");
             foreach (var node in nodes)
             {
                 scriptStringBuilder.Append(GenerateNode(node));
                 if (node != nodes.LastOrDefault())
-                    scriptStringBuilder.AppendLine(", ");
+                    scriptStringBuilder.Append(", \n");
             }
             return scriptStringBuilder.ToString();
         }
@@ -28,12 +28,12 @@ namespace Cypher.ScriptGenerator.Generators
         public string Merge(IList<Node> nodes)
         {
             var scriptStringBuilder = new StringBuilder();
-            scriptStringBuilder.AppendLine(MERGE);
+            scriptStringBuilder.Append(MERGE + "\n");
             foreach (var node in nodes)
             {
                 scriptStringBuilder.Append(GenerateNode(node));
                 if (node != nodes.LastOrDefault())
-                    scriptStringBuilder.AppendLine(", ");
+                    scriptStringBuilder.Append(", \n");
             }
             return scriptStringBuilder.ToString();
         }
@@ -49,7 +49,7 @@ namespace Cypher.ScriptGenerator.Generators
         {
             var scriptStringBuilder = new StringBuilder();
             foreach (var node in nodes)
-                scriptStringBuilder.AppendLine(Delete(node, detach));
+                scriptStringBuilder.Append(Delete(node, detach) + "\n");
             return scriptStringBuilder.ToString();
         }
 
