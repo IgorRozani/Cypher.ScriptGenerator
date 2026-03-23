@@ -5,12 +5,29 @@
     <Authors>Igor Rozani</Authors>
     <Company>IgorSoft</Company>
     <PackageId>Cypher.ScriptGenerator</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <Description>A script generator for cypher</Description>
     <PackageProjectUrl>https://igorrozani.github.io/Cypher.ScriptGenerator/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/IgorRozani/Cypher.ScriptGenerator</RepositoryUrl>
     <PackageTags>cypher, neo4j</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReleaseNotes>
+## v1.1.0
+
+### New Features
+- MERGE support for nodes and relationships, including ON CREATE SET and ON MATCH SET clauses
+- DELETE support for nodes and relationships
+- UNWIND generator for batch MERGE operations on nodes and relationships
+- Index generator: CREATE/DROP INDEX on nodes and relationships
+- Constraint generator: UNIQUE, NODE KEY, and NOT NULL constraints
+
+### Breaking Changes
+- Renamed Node1/Node2 to NodeLeft/NodeRight in relationship models
+- Renamed NodeId1/NodeId2 to NodeIdLeft/NodeIdRight in relationship models
+
+### Other
+- Target framework updated to .NET 9.0
+    </PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
